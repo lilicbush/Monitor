@@ -254,7 +254,9 @@ class Triggers extends \yii\db\ActiveRecord
         $model->trigger_id = $this->id;
         $model->message = $message;
         $model->created_date = date('Y-m-d H:i:s');
-        $model->result_value = $result;
+        if (isset($result)) {
+            $model->result_value = $result;
+        }
         if ($event_id) {
             $model->event_id = $event_id;
         }
