@@ -1,0 +1,45 @@
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav in" id="side-menu" ng-controller="MenuCtrl as menu">
+            <sidebar-search></sidebar-search>
+            <li class="divider"></li><li class="divider"></li><li class="divider"></li><li class="divider"></li>
+            <li ui-sref-active="active">
+                <a href="/#projects" >
+                    <i class="fa fa-cubes fa-fw"></i>
+                    Все проекты
+                </a>
+            </li>
+
+            <li ui-sref-active="active">
+                <a ui-sref="projects.schedule()" >
+                    <i class="fa fa-calendar fa-fw"></i>
+                    Расписание запусков
+                </a>
+            </li>
+
+            <li ui-sref-active="active">
+                <a ui-sref="db.list()" >
+                    <i class="fa fa-database fa-fw"></i>
+                    Управление БД
+                </a>
+            </li>
+
+            <li class="divider"></li><li class="divider"></li><li class="divider"></li><li class="divider"></li>
+
+            <li ui-sref-active="active">
+                <a ui-sref="projects.create" >
+                    <i class="fa fa-plus-square-o fa-fw"></i>
+                    Добавить проект
+                </a>
+            </li>
+
+            <li ng-repeat="(key, project) in projects" ui-sref-active="active" ng-class="{active: collapseVar=={{key+1}}}">
+                <a ui-sref="projects.view({id: {{project.id}}})" ng-click="check(key+1)">
+                    <i class="fa fa-dashboard fa-fw"></i>
+                    {{project.title}}
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- /.sidebar-collapse -->
+</div>

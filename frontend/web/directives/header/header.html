@@ -1,0 +1,55 @@
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="logo">
+            <img ng-src="/images/show.png"  width="40" class="pl-20" />
+            <a class="navbar-brand no-float np" href="/#projects">Site-Monitor</a>
+        </div>
+    </div>
+    <!-- /.navbar-header -->
+
+    <sidebar></sidebar>
+    <ul class="nav navbar-top-links navbar-right">
+
+        <li class="dropdown" ng-controller="TriggersAlertsCtrl">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-alerts">
+                <li ng-repeat="alert in triggers_alerts track by $index">
+                    <a ui-sref="triggers.view({trigger_id: {{alert.trigger.id}}})">
+                        <div>
+                            <i class="fa fa-tasks text-warning"></i> {{alert.trigger.title | limitTo: 25}}
+                            <small>
+                                <span class="pull-right text-danger">
+                                    <i class="fa fa-bell-o" ng-if="alert.last_message.message_type == 'error'" title="Ошибка сравнения"></i>
+                                    <i class="fa fa-bell" ng-if="alert.last_message.message_type == 'system error'" title="Системная ошибка"></i>
+                                </span>
+                            </small>
+                        </div>
+                    </a>
+                    <div ng-if="triggers_alerts[$index + 1]"  class="divider"></div>
+                </li>
+            </ul>
+            <!-- /.dropdown-alerts -->
+        </li>
+
+        <li class="dropdown" ng-controller="UserInfoCtrl">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-user fa-fw"></i>
+                <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li><a ui-sref="users.list" href="javascript:void(0)"><i class="fa fa-user fa-fw"></i> Управление пользователями</a></li>
+                <li><a ui-sref="users.password" href="javascript:void(0)"><i class="fa fa-pencil fa-fw"></i> Изменить пароль</a></li>
+                <li><a ng-click="logout()" href="javascript:void(0)"><i class="fa fa-sign-out fa-fw"></i> Выйти</a></li>
+            </ul>
+        </li>
+        <!-- /.dropdown --> </ul>
+</nav>
